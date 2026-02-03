@@ -218,6 +218,10 @@ ol {
 	grid-column: 1/-1;
 }
 
+/* hoe de fullbleed tegengaan in de fullbleed? */
+/* want fullbleed is nodig voor de achtergrond */
+/* even opnieuw opzoeken in notes */
+
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -432,6 +436,11 @@ strong,
 /* ----------------  */
 
 /* Star icon */
+.five-star-rating {
+	height: 25px;
+	margin-block-end: var(--spacing-050);
+}
+
 .five-star-rating svg {
 	width: 24px;
 	height: 25px;
@@ -549,6 +558,7 @@ picture > img {
 .option-card.bg-accent {
 	background-image: url(./assets/images/pattern-glow.svg);
 	background-position: -25px -100px;
+	background-repeat: no-repeat;
 }
 
 .option-card p:nth-of-type(2) {
@@ -559,11 +569,24 @@ picture > img {
 	font-size: 2.125rem;
 }
 
+.tech-card ul,
 .option-card ul,
 .read-section ul {
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-200);
+}
+
+.list-number-square {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	margin-block: var(--spacing-250);
+	width: 2rem;
+	height: 2rem;
+	border: 2px solid hsl(var(--clr-neutral-900));
+	border-radius: var(--radius-4);
 }
 
 .option-card ul {
@@ -589,23 +612,40 @@ li.large-marker {
 
 section h2 {
 	margin-block-end: var(--spacing-300);
+	max-width: 18ch;
 }
 
 section picture {
 	margin-block-start: var(--spacing-500);
 }
 
-.hero-wrapper {
+header {
 	background-color: hsl(var(--clr-neutral-100));
 	background-image: url('./assets/images/pattern-light-bg.svg');
+	padding-block-start: clamp(
+		var(--spacing-250),
+		var(--spacing-250) + 0.25vw,
+		var(--spacing-300)
+	);
 }
 
 .hero-section {
 	padding-block: var(--spacing-600);
 }
 
+.hero-section-text > h1 {
+	max-width: 20ch;
+}
+
+.hero-section-text > p {
+	margin-block: var(--spacing-200) var(--spacing-300);
+}
+
 @media (min-width: 60em) {
 	.hero-section {
+		/* hier is iets geks */
+		/* opnieuw uitzoeken waarom ik het zo gedaan heb */
+    /* misschien klopt het ook niet meer omdat hero nu in de header zit */
 		display: grid;
 		grid-template-columns: auto repeat(2, 1fr) auto;
 		gap: var(--spacing-400);
@@ -618,6 +658,18 @@ section picture {
 	.hero-section-picture {
 		grid-column: 3;
 	}
+
+	.club-section,
+	.read-section {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-1000);
+	}
+
+  .section-text {
+    align-self: center;
+  }
+
 }
 
 .rating-box {
@@ -632,9 +684,18 @@ section picture {
 	height: 40px;
 }
 
+.read-section {
+	margin-block-start: var(--spacing-800);
+}
+
+.read-section > h2 {
+	max-width: 15ch;
+}
+
 .options-cards {
 	margin-block-start: var(--spacing-300);
 	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: var(--spacing-300);
 }
 
@@ -657,6 +718,16 @@ section picture {
 	padding-block-end: var(--spacing-800);
 }
 
+.cta-section .button {
+	max-width: fit-content;
+	margin-inline: auto;
+}
+
+.cta-section .rating-box,
+.cta-section h2 {
+	margin-inline: auto;
+}
+
 .cta-section h2 {
 	margin-block: var(--spacing-600) var(--spacing-500);
 	text-align: center;
@@ -670,9 +741,20 @@ footer {
 	padding-block-end: var(--spacing-300);
 }
 
-footer p {
-	border-top: 1px solid hsl(var(--clr-neutral-0));
+footer > section {
 	padding-block-start: var(--spacing-300);
+	border-top: 1px solid hsl(var(--clr-neutral-0));
+}
+
+@media (min-width: 40em) {
+	footer > section {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+footer p {
 	font-size: var(--fs-300);
 	font-weight: var(--fw-regular);
 }
