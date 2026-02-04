@@ -218,10 +218,6 @@ ol {
 	grid-column: 1/-1;
 }
 
-/* hoe de fullbleed tegengaan in de fullbleed? */
-/* want fullbleed is nodig voor de achtergrond */
-/* even opnieuw opzoeken in notes */
-
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -569,12 +565,41 @@ picture > img {
 	font-size: 2.125rem;
 }
 
-.tech-card ul,
 .option-card ul,
 .read-section ul {
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-200);
+}
+
+.tech-card ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+	gap: var(--spacing-200);
+}
+
+@media (min-width: 60em) {
+	.tech-card > * {
+		margin-inline: auto;
+		max-width: 1050px;
+	}
+
+	.tech-card h2 {
+		text-align: center;
+		max-width: 15ch;
+	}
+
+	.tech-card li {
+		max-width: 18ch;
+		position: relative;
+	}
+
+	.tech-card li:not(:last-of-type)::after {
+		content: url(./assets/images/pattern-arrow.svg);
+		position: absolute;
+		top: 20px;
+		right: 0px;
+	}
 }
 
 .list-number-square {
@@ -615,7 +640,7 @@ section h2 {
 	max-width: 18ch;
 }
 
-section picture {
+section picture:not(.hero-section-picture) {
 	margin-block-start: var(--spacing-500);
 }
 
@@ -631,6 +656,13 @@ header {
 
 .hero-section {
 	padding-block: var(--spacing-600);
+	gap: var(--spacing-400);
+	/* display: grid; */
+	/* grid-template-columns: 1fr auto 1fr; */
+}
+
+.hero-section > * {
+	grid-column: 2;
 }
 
 .hero-section-text > h1 {
@@ -644,32 +676,41 @@ header {
 @media (min-width: 60em) {
 	.hero-section {
 		/* hier is iets geks */
-		/* opnieuw uitzoeken waarom ik het zo gedaan heb */
-    /* misschien klopt het ook niet meer omdat hero nu in de header zit */
-		display: grid;
-		grid-template-columns: auto repeat(2, 1fr) auto;
-		gap: var(--spacing-400);
+		/* opnieuw uitzoeken */
+		/* misschien klopt het ook niet meer omdat hero nu in de header zit */
+		/* grid-template-columns: auto repeat(2, 1fr) auto; */
 	}
 
 	.hero-section-text {
-		grid-column: 2;
+		/* grid-column: 2; */
+		/* grid-row: 1; */
 	}
 
 	.hero-section-picture {
-		grid-column: 3;
+		/* grid-column: 3; */
+		/* grid-row: 1; */
 	}
 
 	.club-section,
 	.read-section {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-1000);
+		gap: var(--spacing-1000);
 	}
 
-  .section-text {
-    align-self: center;
-  }
+	.read-section .section-text {
+		grid-column: 2;
+		grid-row: 1;
+	}
 
+	.read-section picture {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.section-text {
+		align-self: center;
+	}
 }
 
 .rating-box {
@@ -692,20 +733,30 @@ header {
 	max-width: 15ch;
 }
 
+.options-section,
+.review-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .options-cards {
 	margin-block-start: var(--spacing-300);
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: var(--spacing-300);
+	max-width: 950px;
 }
 
 .review-section {
-	display: flex;
-	flex-direction: column;
 	gap: var(--spacing-400);
 }
 
 @media (min-width: 60em) {
+	.option-card.bg-accent {
+		scale: 1.1;
+	}
+
 	.review-section {
 		align-items: center;
 		text-align: center;
